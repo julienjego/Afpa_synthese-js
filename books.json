@@ -1,0 +1,32 @@
+[
+  {
+    "lib": "Le grand livre de JS",
+    "ref": "B01",
+    "uprice": 15
+  },
+  {
+    "lib": "HTML encore plus vite",
+    "ref": "B02",
+    "uprice": 12
+  },
+  {
+    "lib": "Windows NT 4.0",
+    "ref": "B03",
+    "uprice": 26
+  },
+  {
+    "lib": "Le kit de ressource de NT",
+    "ref": "B04",
+    "uprice": 6
+  },
+  {
+    "lib": "Formation Java",
+    "ref": "B05",
+    "uprice": 14
+  },
+  {
+    "lib": "Comment créer son site web",
+    "ref": "B06",
+    "uprice": 37
+  }
+]
