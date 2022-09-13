@@ -1,34 +1,32 @@
 let books;
 
-let dropdown1 = document.getElementById("book-select1");
-let dropdown2 = document.getElementById("book-select2");
-let dropdown3 = document.getElementById("book-select3");
-let dropdowns = [dropdown1, dropdown2, dropdown3];
-let ddselect = document.getElementsByClassName("dd-select");
+const dropdown1 = document.getElementById("book-select1");
+const dropdown2 = document.getElementById("book-select2");
+const dropdown3 = document.getElementById("book-select3");
+const dropdowns = [dropdown1, dropdown2, dropdown3];
 
-let ref1 = document.getElementById("book-ref1");
-let ref2 = document.getElementById("book-ref2");
-let ref3 = document.getElementById("book-ref3");
-let refs = [ref1, ref2, ref3];
+const ddselect = document.getElementsByClassName("dd-select");
+const ref1 = document.getElementById("book-ref1");
+const ref2 = document.getElementById("book-ref2");
+const ref3 = document.getElementById("book-ref3");
+const refs = [ref1, ref2, ref3];
 
-let qty1 = document.getElementById("book-qty1");
-let qty2 = document.getElementById("book-qty2");
-let qty3 = document.getElementById("book-qty3");
-let qties = [qty1, qty2, qty3];
+const qty1 = document.getElementById("book-qty1");
+const qty2 = document.getElementById("book-qty2");
+const qty3 = document.getElementById("book-qty3");
+const qties = [qty1, qty2, qty3];
 
-let uprice1 = document.getElementById("book-uprice1");
-let uprice2 = document.getElementById("book-uprice2");
-let uprice3 = document.getElementById("book-uprice3");
-let uprices = [uprice1, uprice2, uprice3];
+const uprice1 = document.getElementById("book-uprice1");
+const uprice2 = document.getElementById("book-uprice2");
+const uprice3 = document.getElementById("book-uprice3");
+const uprices = [uprice1, uprice2, uprice3];
 
-let price1 = document.getElementById("book-price1");
-let price2 = document.getElementById("book-price2");
-let price3 = document.getElementById("book-price3");
-let prices = [price1, price2, price3];
+const price1 = document.getElementById("book-price1");
+const price2 = document.getElementById("book-price2");
+const price3 = document.getElementById("book-price3");
+const prices = [price1, price2, price3];
 
-let totalPrice = document.getElementById("books-total");
-
-let totalPriceValue = 0;
+const totalPrice = document.getElementById("books-total");
 
 // Fonction pour charger le JSON
 function loadJSON(callback) {
@@ -49,7 +47,6 @@ function init() {
   loadJSON(function (response) {
     // Parse JSON string into object
     books = JSON.parse(response);
-    console.log(books);
   });
 }
 
@@ -77,7 +74,6 @@ function addDropdownListener() {
       } else if (dropdowns.indexOf(dropdown) == 2) {
         showDetails(ref3, uprice3, e.target.value);
       }
-      console.log(e.target.value);
     });
   }
 }
@@ -94,22 +90,36 @@ function showDetails(indexRef, indexUprice, id) {
 
 // Met à jour le prix total par ligne avec les quantités et le total global
 function calculatePrices() {
+  let totalPriceValue = 0;
+  let totalPriceValue1 = 0;
+  let totalPriceValue2 = 0;
+  let totalPriceValue3 = 0;
   for (let qty of qties) {
     qty.addEventListener("keyup", (e) => {
-      if (qties.indexOf(qty) == 0 && ref1.value != null) {
+      if (
+        qties.indexOf(qty) == 0 &&
+        ref1.value != null &&
+        qty1.value.match(/^$|[0-9]/)
+      ) {
         price1.value = e.target.value * uprice1.value;
-        totalPriceValue += parseInt(price1.value, 10);
-        totalPrice.value = totalPriceValue;
-        console.log(typeof totalPriceValue);
-      } else if (qties.indexOf(qty) == 1 && ref2.value != null) {
+        totalPriceValue1 = parseInt(price1.value, 10);
+      } else if (
+        qties.indexOf(qty) == 1 &&
+        ref2.value != null &&
+        qty2.value.match(/^$|[0-9]/)
+      ) {
         price2.value = e.target.value * uprice2.value;
-        totalPriceValue += parseInt(price2.value, 10);
-        totalPrice.value = totalPriceValue;
-      } else if (qties.indexOf(qty) == 2 && ref3.value != null) {
+        totalPriceValue2 = parseInt(price2.value, 10);
+      } else if (
+        qties.indexOf(qty) == 2 &&
+        ref3.value != null &&
+        qty3.value.match(/^$|[0-9]/)
+      ) {
         price3.value = e.target.value * uprice3.value;
-        totalPriceValue += parseInt(price3.value, 10);
-        totalPrice.value = totalPriceValue;
+        totalPriceValue3 = parseInt(price3.value, 10);
       }
+      totalPriceValue = totalPriceValue1 + totalPriceValue2 + totalPriceValue3;
+      totalPrice.value = totalPriceValue + " €";
     });
   }
 }
