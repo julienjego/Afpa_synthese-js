@@ -57,14 +57,14 @@ function initDropdown() {
 }
 
 // Ajoute un listener pour chaque dropdown
-export function addDropdownListener() {
+function addDropdownListener() {
   dropdowns.forEach((dropdown) => {
     dropdown.addEventListener("change", findDropdown, false);
   });
 }
 
 // Renvoie les infos d'index à showDetails pour chaque dropdown
-export function findDropdown(e) {
+function findDropdown(e) {
   let ref;
   let uprice;
 
@@ -89,7 +89,7 @@ export function findDropdown(e) {
 }
 
 // Affiche détails du livre depuis la sélection dans le dropdown
-export function showDetails(indexRef, indexUprice, id) {
+function showDetails(indexRef, indexUprice, id) {
   for (let book of books) {
     if (book.ref == id) {
       indexRef.value = book.ref;
@@ -135,11 +135,7 @@ function addQtyListener() {
   });
 }
 
-export function choubidou() {
-  console.log("dingo");
-}
-
-// init();
-// initDropdown();
-// addDropdownListener();
-// addQtyListener();
+init();
+initDropdown();
+addDropdownListener();
+addQtyListener();
